@@ -169,6 +169,62 @@ Retention period (days)
 Purge protection-> doesn't allow data to be deleted for Rtn. Period no.
 of days!
 
+*********** Stream ANalytics********
+Input Job needs to be a stream
+	- IoT Hub
+	- Event Hub
+	- BLOB storage 
+
+
+Security-> SHARED ACCESS SIGNATURES-> temporary or time based
+access to any azure resource
+tching events from 'AvroBlah
+
+******* Cosmos ************
+-> is an API that manages STORAGES
+	-> you can write queries in your choice of syntax
+	-> SQL, MongoDB, Cassandra, No-SQL Az Storage Tables
+	or Graph(Gremlin)
+-> IT IS HIGHLY AVAILABLE AND BILLS YOU FOR PERFORMANCE
+	-> doesn't bill you for storage
+	-> your data should be more expensive than cosmos!
+-> most data sources, are either Transactional or Analytical.
+	- even Analytical dbs have a CHALLENGE-> being able
+	to manage the tradeoff between PERFORMANCE and AVAIALBILITY
+	specially between MULTIPLE REGIONS!
+	-> if you want more performance-> availability is hit
+	-> if you want more availability-> performance is hit
+-> Most data solutions, provide you either High Availability or
+	High Performance modes.
+-> COSMOS provides you MULTIPLE steps in between
+	-> 5 CONSISTENCY LEVELS (help you manage tradeoff between
+	performance and availability) 
+Assume, 1 write region, 3 read regions (for high availability)
+	-> changes happen in 1
+	a) STRONG-> all 3 read regions updates (but unavailability
+		may be encountered)
+	b) Bounded Staleness-> at least 1 read region immediate updated,
+		other 2 available while 1 is being updated
+
+	c) Session-> at least 2 read regions immedaite update
+		-> at least 1 available for read 
+	d) Consistent-> Data writing sequence will be delayed, but
+		not change. Little lag is EXPECTED. But all nodes
+		mostly available for read. 
+	e) Eventual-> much lag acceptable. Changes are 'EVENTUALLY'
+	written to read nodes. Highest availability, lowest perf. 
+		-> analytics should expect DELAY 
+-> You decide how much DELAY is acceptable 
+https://docs.microsoft.com/en-gb/azure/cosmos-db/consistency-levels#bounded-staleness
+https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels#:~:text=With%20Azure%20Cosmos%20DB%2C%20developers,for%20specific%20real%2Dworld%20scenarios.
+
+
+
+
+
+
+
+
 
 topics pending:
 - SQL Database, Synapse [last item] (SQL)
