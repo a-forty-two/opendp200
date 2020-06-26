@@ -1,0 +1,194 @@
+Welcome to DP200!
+
+https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE3Vzx2
+
+Fundamentals:
+
+Please use-> Firefox or Chrome (IN PRIVATE MODE)
+(ONLY USING PERSONAL ID-> NO OFFICE ID for next
+step) -> microsoftazurepass.com
+
+- Azure Account (1-> n directory, 1dir -> n subs)
+- Azure Active Directory (multiple)
+	- Identity and Access Management (IAM)
+	- Authentication 
+	- Role based Access Control
+		- Service Principal name (uri)
+		- User Principal name (email)
+
+	-multiple SUBSCRIPTION
+
+portal.azure.com
+
+3 Vs of Big Data: Velocity, Variety, Volume 
+
+
+ETL-> on premise 
+ELT -> Extract, LOAD into CLOUD, then keep transforming!
+	- minimum latency 
+	- no network cost associated with Az resources accessing storage
+	- cost of storage is MONSTROUSLY LESS than on prem!
+
+
+Resource Group-> LIFECYCLE manager. 
+	-> resources created and del together are in same RG
+	-> DB + API + FE-> replace the jquery with a new Angular APP
+		-> del FE-> do we also want our DB and API to be del?
+			- NO? Diff RG
+			- YES-> same RG
+
+
+various types of hardwares-> 
+RAM, CPU, STORAGE, THROUGHPUT-> 1 Unit-> % of these values
+
+10 GB RAM machine-> 10 MemoryUnits-> each unit is 1 GB 
+
+DWU-> data warehouse unit
+DTU-> data transfer unit
+RU-> reserved/response units 
+SKU-> stored kit unit
+
+Replication in Storage:
+
+1) Web Developer-> closest to users 
+2) Data Scientist-> cheapest, all data available locally-> LRS
+3) Data Engineer-> High availability (at least READ)-> RA-GRS
+		 High availability (for read/write)-> GRS
+
+
+Access Tier: Hot (frequently access data), Cool (once a week/month),
+Archive(less than 1 per year) 
+
+Linked Services:
+	-> SQL Server-> sql server connection string
+	-> mysql -> mysql connection string
+	-> Dropbox-> username & password
+	-> Google BigQuery-> Google auth and project ID
+	-> AWS S3 -> AWS Secret/Project ID
+Dedicated Network Services for high availability data-transfer
+
+Linked Services have a AUTORESOLVE integration runtime
+	-> figure out what type of connection string should be used
+
+where to host integration runtime? 
+	- Azure =>   On CLoud only
+	- Self-Hosted => On prem or on cloud
+	- Sql server Intg. Services-> hosted on cloud or on prem 
+https://docs.microsoft.com/en-us/azure/data-factory/monitor-integration-runtime
+
+Triggers->
+	- Schedule (Sat -6pm, then every 2 minutes)
+	- Event based (every time a new blob is created or deleted)
+	- Tumbling (LONGER SCHEDULES-> used to collect data in batches)
+		(Sat -6pm, then every saturday)
+
+
+Hosting Data Factory-> 3 ways to host
+	-> Cloud (internet)-> Azure hosted
+	-> On prem/private networks/hybrid-> Self-Hosted 
+	-> SQL SERVER-> SQL Server Hosted -> private or on cloud
+
+
+
+1 smart car-> local (lat, long), fuel status, front, left, right, behind,
+a lot of other-> 12 Pb of data per day 
+
+**** Apache Spark ***
+Resilient Distributed Datasets (RDDs)
+Default: Parquet 
+
+In Memory Data Analysis (RAM)- also do In Disk calc. 
+
+Data analysis: 
+PySpark, Scala, Java
+
+data in Ram-> SparkContext
+batch-> SqlContext (HIVE)
+stream-> StreamContext 
+
+-imperetive v/s declarative programming languages\
+
+-> C/C#/Java/C++/Python -> you told what to do, how to do (impr)
+-> PSpark/Tensflow/HTML->you only tell what to do, NOT how to do!(decl)
+
+                    imperative         decl
+a=1          a=?         1              ok
+b=2          b=?         2              ok
+c=a+b        c=?         3              ok
+print(c)     print(c)    3              CALCULATION->3
+
+Apache spark always required a sharded or distributed storage
+
+DataBricks-> Spark Core + utilities 
+	- supports Data Lake and COSMOS db as their local file system
+ 	- Databrick Utilities (dbutils)
+	- Pyspark, Scala, SQL, R
+Clusters: 
+	- standard-> individual or very small teams 
+		- lower resources (14 GB ->3 machines)
+	- high concurrency-> share infra with many devs/scientists/testers
+		=> a cluster pool of 256 GB ram 
+
+-> DataLake has private data
+	-> long term access requires Auth
+	-> DataBricks can be auth if it had access to account keys
+	-> sharing account keys over network is SECURITY RISK!
+	-> we hide the key in KEY VAULT and create a secret
+		-> this secret is shared with DataBricks devs instead
+
+Apache Spark-> RUNS On CLUSTERS-> multiple VMs
+	-> IaaS-> Virtual Network and firewall (NSG)
+
+
+Key Vault HSM-> hardware security module 
+	- RSA keys, blockchains
+2 kinds of secrets-> Manual (keys) or Upload Certificates (crt or pem)
+
+-> Name of container and file: bricky gapminder.csv
+-> key1 : 4P3ybv09AzedWOxlYKX9+bFVhvoCfhseeDtf9g39iuGpLZ/5ZWiquKdoq4Cqp+rir0Ul+sUrOGKvAcGrF/amog==
+-> url: jackfruit.blob.core.windows.net
+-> keyVault secret key: bugsbunny
+
+Data bricks: #secrets/createScope
+Secret Scope: genghiskahn
+Databrick Dev finally uses: bugsbunny and genghiskahn
+
+ 
+This keyVault Secret Key is provided to DataBricks admin to create a
+DataBricks Secret Scope.
+Then DataBricks admin will create DataBricks Secret Scope and give it
+to DataBricks Developers (PySpark/Scala/R/SQL) who will then
+use Scope and Key to access storage. 
+
+
+
+Soft delete-> acts like a recycle bin 
+
+Retention period (days)
+
+Purge protection-> doesn't allow data to be deleted for Rtn. Period no.
+of days!
+
+
+topics pending:
+- SQL Database, Synapse [last item] (SQL)
+- Cosmos DB (noSQL)
+- monitoring 
+- exam prep part 2
+today:
+- stream analytics
+- exam prep part 1
+
+if time left:
+- data factory[repeat + more]
+- polybase
+
+
+
+
+
+
+
+
+
+ 
