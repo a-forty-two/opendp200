@@ -1,5 +1,6 @@
 Welcome to DP200!
 
+
 https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RE3Vzx2
 
 Fundamentals:
@@ -218,31 +219,58 @@ Assume, 1 write region, 3 read regions (for high availability)
 https://docs.microsoft.com/en-gb/azure/cosmos-db/consistency-levels#bounded-staleness
 https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels#:~:text=With%20Azure%20Cosmos%20DB%2C%20developers,for%20specific%20real%2Dworld%20scenarios.
 
+Failover-> Primary Data Center is made secondary,
+and secondary becomes primary
+Automatic-> automatic switch when primary is 
+unavailable 
+Non Relational v/s Relational
+- every row could hold diff data   - every row is same
+- denormalization                  - normalization
+- prefer avoid jumping between     - table jumps are encouraged for
+collections			    reduced redundancy and foreign keys
 
 
+*********Sql Databases and Synapse Analytics************
+Data Enc. at Rest-> protected-> Transparent Data Encryption 
+Data Enc. in Motion-> Transport Layer Security (TLS) 
+https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver15
+
+Transparent Data Encryption
+1) OS & SQL have already done their job 
+2) User->
+	a) Create a MASTER KEY
+	/*use master;*/
+	CREATE MASTER KEY ENCRYPTION BY PASSWORD='donaldDuck!';
+	b) use that master key to create a CERTIFICATE
+	CREATE CERTIFICATE myCerti WITH SUBJECT =' My DEK Certificate';
+	c) we will use this certificate to create Database 	
+		Encryption Key
+	use yokozuna;
+	CREATE DATABASE ENCRYPTION KEY
+    		WITH ALGORITHM = AES_128
+		ENCRYPTION BY SERVER CERTIFICATE myCerti;
+	d) DEK will be used to create encryption
 
 
+*********** Monitoring **************
+- inside the resource (resource specific- Data Factory, Databricks..)
+	- DataBricks, DataFactory... 
+- outside the resource(generic)
+	- 2 tools: Log Analyzer and Monitor
+	
+Dignostic Setting-> String (LOG) or INT/DOUB/NUM (METRIC)
+	-> metrics are plotted
+	-> LOGS are searched upon 
 
 
-
-
-topics pending:
-- SQL Database, Synapse [last item] (SQL)
-- Cosmos DB (noSQL)
-- monitoring 
-- exam prep part 2
-today:
-- stream analytics
-- exam prep part 1
-
-if time left:
-- data factory[repeat + more]
-- polybase
-
-
-
-
-
+3 things that we can do with logs/metrics:
+	-> Analyze them right now (Log Analytics [and monitor])
+		- retained for 720 days
+	-> Store now, Analyze them later (BLOB)
+		- Az is responsible for retaining
+		- Retention Period: max 365 days [1 year] 
+	-> other tool or stream outside (Event Hub) 
+		-> no Az's responsibility, target has to configure
 
 
 
